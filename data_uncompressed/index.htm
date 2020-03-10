@@ -40,55 +40,24 @@
         </ul>
     </nav>
 
-    <div class="top-banner">
-        <span id="version"></span>
-        <div class="banner-gradient"></div>
-        <div>Центр открытого проектирования <br>«у Счастливчика»</div>
-    </div>
+    <div>
+        <div>
+            <div>
+                <div>
+                    <div>
+                        <ul>
+                            <li><a class="menuitem" href="#"
+                                    data-href="/data_uncompressed/distillation.htm">Дистилляция</a></li>
+                            <li><a class="menuitem" href="#" data-href="/data_uncompressed/reflux.htm">Ректификация</a>
+                            </li>
+                            <li><a class="menuitem" href="#" data-href="/data_uncompressed/mashing.htm">Затирание</a>
+                            </li>
+                            <li><a class="menuitem" href="#" data-href="/data_uncompressed/sensors.htm">Датчики</a></li>
+                            <li><a class="menuitem" href="#" data-href="/data_uncompressed/pid.htm">ПИД регулировка</a>
+                            </li>
+                        </ul>
 
-    <div class="main-tabs fill">
-        <div class="container-fluid">
-            <div class="tab-content">
-                <div class="tab-pane active" id="home">
-                    <div class="row">
-                        <div class="section section_navtabs">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="wrapper-nav">
-                                            <ul id="nav-tabs" class="nav nav-tabs list-tab swipe-tabs">
-                                                <li class="theme_grey swipe-tab"><a href="#"
-                                                        data-href="/data_uncompressed/distillation.htm">Дистилляция</a>
-                                                </li>
-                                                <li class="theme_grey swipe-tab"><a href="/data_uncompressed/reflux.htm"
-                                                        data-target="#reflux" aria-controls="reflux" role="tab"
-                                                        data-toggle="tab">Ректификация</a></li>
-                                                <li class="theme_grey swipe-tab"><a
-                                                        href="/data_uncompressed/mashing.htm" data-target="#mashing"
-                                                        aria-controls="mashing" role="tab"
-                                                        data-toggle="tab">Затирание</a></li>
-                                                <!--<li class="theme_grey swipe-tab"><a href="brewing.htm" data-target="#brewing" aria-controls="brewing" role="tab" data-toggle="tab">Затирание</a></li>-->
-                                                <li class="theme_grey swipe-tab"><a
-                                                        href="/data_uncompressed/sensors.htm" data-target="#sensors"
-                                                        aria-controls="sensors" role="tab" data-toggle="tab">Датчики</a>
-                                                </li>
-                                                <li class="theme_grey swipe-tab"><a href="/data_uncompressed/pid.htm"
-                                                        data-target="#pid" aria-controls="pid" role="tab"
-                                                        data-toggle="tab">ПИД регулировка</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-content list-tab-content swipe-tabs-container">
-                            <div class="tab-pane theme_grey swipe-tab-content" id="distillation2"></div>
-                            <div class="tab-pane swipe-tab-content theme_grey" id="reflux"></div>
-                            <div class="tab-pane swipe-tab-content theme_grey" id="mashing"></div>
-                            <!--<div class="tab-pane swipe-tab-content theme_grey" id="brewing"></div>-->
-                            <div class="tab-pane swipe-tab-content theme_grey" id="sensors"></div>
-                            <div class="tab-pane swipe-tab-content theme_grey" id="pid"></div>
-                        </div>
+                        <div id="content"></div>
                     </div>
                 </div>
                 <div class="tab-pane" id="settings">
@@ -222,7 +191,6 @@
         </div>
     </div>
 
-    <div id="distillation"></div>
     <footer class="footer">
         <p>© 2020 ITmindCo</p>
         <p class="right">www.LuckyCenter.ru</p>
@@ -262,21 +230,40 @@
                 e.preventDefault();
                 document.getElementById('imagemodal2').show();
             });
-            document.querySelector('#distillation_link').addEventListener('click', function (e) {
-                e.preventDefault();
 
-                var link = "/data_uncompressed/distillation.htm";
-                var content = document.querySelector('#distillation');
+            items = document.querySelectorAll(".menuitem");
+            items.forEach(function (item) {
+                item.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    var url = item.getAttribute("data-href");
+                    var content = document.querySelector('#content');
 
-                var http = new XMLHttpRequest();
-                if (http) {
-                    http.open('get', link);
-                    http.onreadystatechange = function () {
-                        if (http.readyState == 4) { content.innerHTML = http.responseText; }
-                    }
-                    http.send(null);
-                }
+                    fetch(url)
+                        .then(response => response.text())
+                        .then(result => content.innerHTML = result);
+                });
             });
+            //link = document.querySelector('#distillation_link');
+            // link.addEventListener('click', function (e) {
+            //     e.preventDefault();
+            //     var url = link.getAttribute("data-href");
+            //     var content = document.querySelector('#content');
+
+            //     fetch(url)
+            //         .then(response => response.text())
+            //         .then(result => content.innerHTML = result);
+            // прочитать тело ответа как текст
+
+
+            // var http = new XMLHttpRequest();
+            // if (http) {
+            //     http.open('get', link);
+            //     http.onreadystatechange = function () {
+            //         if (http.readyState == 4) { content.innerHTML = http.responseText; }
+            //     }
+            //     http.send(null);
+            // }
+            //});
         });
     </script>
 </body>
