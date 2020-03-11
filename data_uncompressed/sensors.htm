@@ -3,17 +3,17 @@
 	<object type="image/svg+xml" data="dist.svg" height="300"></object>
 
 	<div id="sensors_settings">
-		<div id="error_sensors"></div>
+		<div id="error_sensors" style="grid-column: 1 / span 5;"></div>
 
-		<p>Датчики температуры</p>
+		<p style="grid-column: 1 / span 5;"> Датчики температуры</p>
 
 		<!--8 штук-->
 		<div id="t_sensors">
 			<div class="t_sensor">
-				<span>t1</span>
-				<input placeholder="Название" id="sensor_name_t1" class="form-control input-sm noSwipe" type="text" value="">
+				<span style="width: 20px;">t1</span>
+				<input placeholder="Название" id="sensor_name_t1" type="text" value="">
 				<input type="hidden" id="sensor_color_t1" onchange="svgFillUpdate(this.value,'t1')" value="">
-				<button class="btn btn-sm jscolor {valueElement: 'sensor_color_t1'} noSwipe">Цвет</button>
+				<button>Цвет</button>
 
 				<select id="sensor_number_t1">
 					<option value="">Сортировка</option>
@@ -27,13 +27,14 @@
 					<option value="8">8</option>
 				</select>
 
-				<span id="sensor_val_t1"></span><span class="hidden">&#176С</span>
+				<span id="sensor_val_t1"></span>
+				<span class="hidden">&#176С</span>
 			</div>
 		</div>
 
-		<div>
-			<span class="input-group-addon">p1</span>
-			<input id="sensor_name_p1" class="form-control input-sm noSwipe" type="text" readonly value="Атмосферное давление">
+		<div class="p_sensor">
+			<span>p1</span>
+			<input id="sensor_name_p1" type="text" readonly value="Атмосферное давление">
 			<input type="hidden" id="sensor_color_p1" value="">
 			<button class="btn btn-sm jscolor {valueElement: 'sensor_color_p1'} noSwipe">Цвет</button>
 			<span id="sensor_val_p1"></span><span class="hidden">мм рт.ст.</span>
@@ -42,16 +43,20 @@
 
 		<p>Исполнительные устройства</p>
 		<!--4 штуки-->
-		<div>
-			<span class="input-group-addon">out1</span>
-			<input placeholder="Название" id="device_name_out1" type="text" value="">
+		<div id="out_sensors">
+			<div class="out_sensor">
+				<span class="input-group-addon">out1</span>
+				<input placeholder="Название" id="device_name_out1" type="text" value="">
+			</div>
 		</div>
 
 		<p>Датчики безопасности</p>
 		<!--4 штуки-->
-		<div>
-			<span>in1</span>
-			<input placeholder="Название" id="safety_name_in1" type="text" value="">
+		<div id="in_sensors">
+			<div class="in_sensor">
+				<span>in1</span>
+				<input placeholder="Название" id="safety_name_in1" type="text" value="">
+			</div>
 		</div>
 
 		<div id="sensors_group_button">
@@ -65,7 +70,7 @@
 </div>
 
 <script>
-
+	InitSensors();
 	// $(function () {
 	// 	$("#get_sensors").trigger("click");
 	// 	jscolor.installByClassName("jscolor");

@@ -20,6 +20,18 @@
  	margin: 20px;
  }
 
+#t_sensors{
+	 display: grid;
+ }
+
+ #sensors_settings{
+	 width: 30%;
+	 display: grid;
+	 grid-template-columns: auto auto auto auto auto;
+ }
+ .t_sensor, .p_sensor {
+	 margin: 2px 0px;
+ }
  .container {
  	display: grid;
  	grid-template-columns: 1fr 5fr;
