@@ -1,5 +1,9 @@
 <script>
-	import Settings from './Components/Settings.svelte';
+	import Navbar from './Components/Navbar.svelte';
+	import Pages from './Components/Pages.svelte';
+	import Footer from './Components/Footer.svelte';
 </script>
 
-<Settings />
+<Navbar />
+<Pages />
+<Footer />

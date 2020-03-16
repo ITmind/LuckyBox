@@ -53,7 +53,7 @@
     }
 </style>
 
-<div id="settings">
+<div id="settings" class="tab-pane theme_grey swipe-tab-content active">
 
     <div id="error_settings">{error}</div>
 
