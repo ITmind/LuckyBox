@@ -20,3 +20,5 @@ CMakeListsPrivate.txt
 /project_data/data_old/
 /project_data/node_modules/
 .vscode
+node_modules
+/Svelte-app/public/build
