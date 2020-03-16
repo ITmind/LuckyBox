@@ -24,9 +24,15 @@
     <nav class="navbar">
         <div class="navbar-brand">LuckyBox Система автоматики винокура</div>
         <ul class="topmenu">
-            <li><a href="#home">Главная</a></li>
-            <li><a class="menuitem" href="#" data-href="/data_uncompressed/settings.htm">Настройки</a></li>
-            <li><a href="#">Помощь<span class="caret"></span></a>
+            <li><a href="#home" class="svg">
+                <object id="distillation_start" type="image/svg+xml" data="home.svg" height="30"></object>
+            </a></li>
+            <li><a class="svg menuitem" href="#" data-href="/data_uncompressed/settings.htm">
+                <object id="distillation_start" type="image/svg+xml" data="settings.svg" height="27"></object>
+            </a></li>
+            <li><a href="#">
+                <object id="distillation_start" type="image/svg+xml" data="menu.svg" height="30"></object>
+            </a>
                 <ul class="submenu">
                     <li><a id="pop_sensors" href="#">Подключение датчиков</a></li>
                     <li><a href="https://luckycenter.ru/mnogofunkcionalnaja-avtomatika-luckybox"
@@ -41,11 +47,11 @@
     </nav>
 
     <nav class="pagenav">
-        <a class="menuitem" href="#" data-href="/data_uncompressed/distillation.htm">Дистилляция</a>
-        <a class="menuitem" href="#" data-href="/data_uncompressed/reflux.htm">Ректификация</a>
-        <a class="menuitem" href="#" data-href="/data_uncompressed/mashing.htm">Затирание</a>
-        <a class="menuitem" href="#" data-href="/data_uncompressed/sensors.htm">Датчики</a>
-        <a class="menuitem" href="#" data-href="/data_uncompressed/pid.htm">ПИД регулировка</a>
+        <a class="menuitem flat_button_secondA" href="#" data-href="/data_uncompressed/distillation.htm">Дистилляция</a>
+        <a class="menuitem flat_button_secondA" href="#" data-href="/data_uncompressed/reflux.htm">Ректификация</a>
+        <a class="menuitem flat_button_secondA" href="#" data-href="/data_uncompressed/mashing.htm">Затирание</a>
+        <a class="menuitem flat_button_secondA" href="#" data-href="/data_uncompressed/sensors.htm">Датчики</a>
+        <a class="menuitem flat_button_secondA" href="#" data-href="/data_uncompressed/pid.htm">ПИД регулировка</a>
     </nav>
 
     <div id="content"></div>
@@ -78,38 +84,14 @@
     <script type="text/javascript" src="/data_uncompressed/export-data.js"></script>
 
     <!--Скрипты-->
-    <script type="text/javascript" src="/data_uncompressed/ajaxloader.js"></script>
-    <script type="text/javascript" src="/data_uncompressed/dialog.js"></script>
-    <script type="text/javascript" src="/data_uncompressed/scripts.js?v=c1823c6956a14d4338c7"></script>
-
     <script type="text/javascript" src="/data_uncompressed/jscolor.js"></script>
+    <script src="/data_uncompressed/scripts.js"></script>
+    <script src="/data_uncompressed/index.js"></script>
     <script src="/data_uncompressed/sensors.js"></script>
+    <script src="/data_uncompressed/distillation.js"></script>
+    <script src="/data_uncompressed/reflux.js"></script>
+    <script src="/data_uncompressed/mashing.js"></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelector('#pop_sensors').addEventListener('click', function (e) {
-                e.preventDefault();
-                document.getElementById('imagemodal2').show();
-            });
-
-            items = document.querySelectorAll(".menuitem");
-            items.forEach(function (item) {
-                item.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    var url = item.getAttribute("data-href");
-                    var content = document.querySelector('#content');
-
-                    fetch(url)
-                        .then(response => response.text())
-                        .then(result => content.innerHTML = result)
-                        .then(x => {
-                            script = content.querySelector('script');
-                            eval(script.text);
-                        });
-                });
-            });
-        });
-    </script>
 </body>
 
 </html>

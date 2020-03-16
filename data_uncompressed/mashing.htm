@@ -1,30 +1,28 @@
 <div class="container">
 
-	<object type="image/svg+xml" data="mashing.svg" height="300"></object>
+	<object type="image/svg+xml" data="mashing.svg" height="200"></object>
 
-	<div>
+	<div class="parampanel">
 		<div id="error_mashing" class="col-md-offset-2 col-md-8"></div>
 		<div id="mashing_process"></div>
 
-		<button id="mashing_add_sensor" type="button" class="btn btn-primary btn-sm noSwipe">Добавить датчики для процесса</button>
+		<button id="mashing_add_sensor" type="button" class="flat_button_main">Добавить датчики для
+			процесса</button>
 
 		<div id="mashing_group_volume">
 			<div>Громкость звукового сигнала</div>
-			<input id="mashing_volume" type="range" value="0" min="0" max="100" step="1" style="display: block;">
-			<button id="mashing_set_volume" type="button">Сохранить</button>
+			<input id="mashing_volume" type="range" value="0" min="0" max="100" step="1">
+			<object id="mashing_set_volume" type="image/svg+xml" data="save.svg" height="30"></object>
 		</div>
 
-		<div id="mashing_start_group_button"></div>
-		<button id="mashing_stop" type="button">СТОП</button>
-		<button id="mashing_start" type="button">СТАРТ</button>
+		<div class="controlmenu">
+			<object id="mashing_start" type="image/svg+xml" data="play.svg" height="24"></object>
+			<object id="mashing_stop" class="hide2" type="image/svg+xml" data="stop.svg" height="24"></object>
+		</div>
 	</div>
 
 	<div id="view_mashing_chart"></div>
 </div>
 <script>
-	$(function () {
-		setTimeout(function () {
-			$.fn.pasteMashingSensors(false);
-		}, 1000);
-	});
+	refluxPageLoadComplite();
 </script>

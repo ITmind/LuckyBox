@@ -2,31 +2,76 @@
 
 	<object type="image/svg+xml" data="dist.svg" height="300"></object>
 
-	<div>
+	<div id="distillation_settings" class="parampanel">
 		<div id="error_distillation"></div>
-		<div id="distillation_process"></div>
+		
+		<div class="controlmenu">
+			<object id="distillation_start" type="image/svg+xml" data="play.svg" height="24"></object>
+			<object id="distillation_stop" class="hide" type="image/svg+xml" data="stop.svg" height="24"></object>
+			<span id="distillation_status">Остановлено</span>
+		</div>
 
-		<button id="distillation_add_sensor" type="button" class="btn btn-primary btn-sm noSwipe">Добавить датчики для процесса</button>
+		<div id="distillation_process">
+			<div style="display: grid; grid-template-columns: 5rem 5rem;">
+				<div id="distillation_step">step</div>
+				<div id="distillation_time">time</div>
+			</div>
+			<div>
+				<span>Мощность тена:</span>
+				<span id="distillation_power_value"></span><span>%</span>
+				<input id="distillation_power_set" type="number" value="0" min="0" max="100" step="1" size="4">
+			</div>
+			<div>
+				<span>Рабочая мощность после прогрева куба:</span>
+				<input id="distillation_power_lower_set" type="number" value="0" min="0" max="100" step="1" size="4">
+			</div>
+
+			<div style="display: grid; grid-template-columns: 10rem 5rem auto ;">
+				<div></div>
+				<div>Значение</div>
+				<div>Отсечка</div>
+				<div id="distillation_t_container" style="display: contents;">
+					<div class="distillation_t" id="distillation_alert_bg_${sensor_key}" style="display: contents;">
+						<div id="distillation_alert_text_${sensor_key}">t&#176 ${name} </div>
+						<div><span id="distillation_${sensor_key}"></span><span>&#176С</span></div>
+						<div>
+							<input id="distillation_cutoff_${sensor_key}" type="number" value="${allertValue}" min="0" max="105"
+								step="0.5" size="4">
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div id="distillation_out_container" style="display: grid; grid-template-columns: 10rem 5rem;">
+				<div class="distillation_out" style="display: contents;">
+					<div>${name}</div>
+					<div><span id="distillation_${sensor_key}"><span>✔</span></span></div>
+				</div>
+			</div>
+			<div id="distillation_in_container" style="display: grid; grid-template-columns: 10rem 5rem;">
+				<div class="distillation_in" id="distillation_alert_bg_${sensor_key}" style="display: contents;">
+					<div id="distillation_alert_text_${sensor_key}">${name}</div>
+					<div><span id="distillation_${sensor_key}"></span></div>
+				</div>
+			</div>
+		</div>
+
+		<button id="distillation_add_sensor" class="flat_button_main" type="button">Добавить датчики для
+			процесса</button>
 
 		<div id="distillation_group_volume">
 			<div>Громкость звукового сигнала</div>
-			<input id="distillation_volume" type="range" value="0" min="0" max="100" step="1" style="display: block;">
-			<button id="distillation_set_volume" type="button">Сохранить</button>
+			<input id="distillation_volume" type="range" value="0" min="0" max="100" step="1">
+			<object id="distillation_set_volume" type="image/svg+xml" data="save.svg" height="30"></object>
+			<!-- <button id="distillation_set_volume" class="flat_button_main" type="button">Сохранить</button> -->
 		</div>
 
-		<div id="distillation_start_group_button">
-			<button id="distillation_stop" type="button">СТОП</button>
-			<button id="distillation_start" type="button">СТАРТ</button>
-		</div>
+
 
 		<div class="bg-info noSwipe" id="view_distillation_chart"></div>
 	</div>
 
 </div>
 <script>
-	$(function () {
-		setTimeout(function () {
-			$.fn.pasteDistillationSensors(false);
-		}, 1000);
-	});
+	distilationsPageLoadComplite();
 </script>

@@ -1,19 +1,24 @@
+<head>
+	<link href="sensors.css" rel="stylesheet">
+</head>
 <div class="container">
 
 	<object type="image/svg+xml" data="dist.svg" height="300"></object>
 
-	<div id="sensors_settings">
-		<div id="error_sensors" style="grid-column: 1 / span 5;"></div>
+	<div id="sensors_settings" class="parampanel">
 
-		<p style="grid-column: 1 / span 5;"> Датчики температуры</p>
+		<div id="error_sensors"></div>
+		<p> Датчики температуры</p>
 
 		<!--8 штук-->
-		<div id="t_sensors">
+		<div id="t_sensors" class="sensors_grid">
 			<div class="t_sensor">
-				<span style="width: 20px;">t1</span>
+				<span>t1</span>
 				<input placeholder="Название" id="sensor_name_t1" type="text" value="">
-				<input type="hidden" id="sensor_color_t1" onchange="svgFillUpdate(this.value,'t1')" value="">
-				<button>Цвет</button>
+				<div>
+					<input type="hidden" id="sensor_color_t1" onchange="svgFillUpdate(this.value,'t1')" value="">
+					<button>Цвет</button>
+				</div>
 
 				<select id="sensor_number_t1">
 					<option value="">Сортировка</option>
@@ -27,23 +32,29 @@
 					<option value="8">8</option>
 				</select>
 
-				<span id="sensor_val_t1"></span>
-				<span class="hidden">&#176С</span>
+				<div>
+					<span id="sensor_val_t1"></span>
+					<span class="hidden">&#176С</span>
+				</div>
 			</div>
 		</div>
 
-		<div class="p_sensor">
+		<div id="p_sensor" class="sensors_grid">
 			<span>p1</span>
 			<input id="sensor_name_p1" type="text" readonly value="Атмосферное давление">
-			<input type="hidden" id="sensor_color_p1" value="">
-			<button class="btn btn-sm jscolor {valueElement: 'sensor_color_p1'} noSwipe">Цвет</button>
-			<span id="sensor_val_p1"></span><span class="hidden">мм рт.ст.</span>
+			<div>
+				<input type="hidden" id="sensor_color_p1" value="">
+				<button class="btn btn-sm jscolor {valueElement: 'sensor_color_p1'} noSwipe">Цвет</button>
+			</div>
+			<div>
+				<span id="sensor_val_p1"></span>
+				<span class="hidden">мм рт.ст.</span>
+			</div>
 		</div>
-
 
 		<p>Исполнительные устройства</p>
 		<!--4 штуки-->
-		<div id="out_sensors">
+		<div id="out_sensors" class="sensors_grid">
 			<div class="out_sensor">
 				<span class="input-group-addon">out1</span>
 				<input placeholder="Название" id="device_name_out1" type="text" value="">
@@ -52,18 +63,17 @@
 
 		<p>Датчики безопасности</p>
 		<!--4 штуки-->
-		<div id="in_sensors">
+		<div id="in_sensors" class="sensors_grid">
 			<div class="in_sensor">
 				<span>in1</span>
 				<input placeholder="Название" id="safety_name_in1" type="text" value="">
 			</div>
 		</div>
 
-		<div id="sensors_group_button">
-
-			<button id="get_sensors" type="button">Опросить датчики</button>
-			<button id="reset_sensors" type="button">Сбросить настройки</button>
-			<button id="set_sensors" type="button">Сохранить</button>
+		<div class="controlmenu">
+			<object id="get_sensors" type="image/svg+xml" data="update.svg" height="30"></object>
+			<object id="reset_sensors" type="image/svg+xml" data="clear.svg" height="30"></object>
+			<object id="set_sensors" type="image/svg+xml" data="save.svg" height="30"></object>
 		</div>
 
 	</div>

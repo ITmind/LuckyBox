@@ -1,0 +1,18 @@
+ .t_sensor, .out_sensor, .in_sensor{
+     display: contents;
+ }
+
+ .sensors_grid{
+	 display: grid;
+     grid-template-columns: 35px 10rem 60px 6rem 50px;
+     margin: 5px 0px;
+     
+ }
+
+ .sensors_grid div{
+     justify-self: center;
+ }
+
+ .t_sensor, .p_sensor {
+	 margin: 0px 0px;
+ }
