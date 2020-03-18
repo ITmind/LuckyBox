@@ -23,7 +23,7 @@
                                     <div class="col-md-12">
                                         <div class="wrapper-nav">
                                             <ul id="nav-tabs" class="nav nav-tabs list-tab swipe-tabs">
-                                                <li class="theme_grey swipe-tab"><a 
+                                                <li class="theme_grey swipe-tab"><a href="#"
                                                     on:click="{e=>selected_component = Distillation}"
                                                         >Дистилляция</a></li>
                                                 <li class="theme_grey swipe-tab"><a 
