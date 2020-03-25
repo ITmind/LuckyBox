@@ -1,3 +1,15 @@
+<script>
+    export let alco_val = 0;
+    let hide_alco = true;
+    $: svg_distillation_alco_val > 0 ? hide_alco = false : hide_alco = true;
+</script>
+
+<style>
+.hide{
+    display: none;
+}
+
+</style>
 <svg version="1.1" style="display: block;" id="svg_distillation" width="100%" height="100%"
     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 160 300"
     enable-background="new 0 0 160 300" xml:space="preserve">
@@ -75,10 +87,10 @@
         <text id="svg_distillation_t4" transform="matrix(1 0 0 1 90 38.25)" font-size="12" />
     </g>
     <g>
-        <text id="svg_distillation_alco_txt" style="display: none;" transform="matrix(1 0 0 1 14 210)" font-size="10px">
+        <text id="svg_distillation_alco_txt" class:hide = {hide_alco} transform="matrix(1 0 0 1 14 210)" font-size="10px">
             Остаток спирта
         </text>
-        <text id="svg_distillation_alco_val" style="display: none;" transform="matrix(1 0 0 1 36 225)"
-            font-size="12px" />
+        <text class:hide = {hide_alco} transform="matrix(1 0 0 1 36 225)"
+            font-size="12px" >{alco_val} %</text>>
     </g>
 </svg>
