@@ -1,7 +1,7 @@
 <script>
-    import Power from "./Templ/Power";
-    import PowerLower from "./Templ/PowerLower";
-    import Delta from "./Templ/Delta";
+    import Power from "./Templ/Power.svelte";
+    import PowerLower from "./Templ/PowerLower.svelte";
+    import Delta from "./Templ/Delta.svelte";
     import { sendRequest } from "./../utils.js";
     import { globalSensorsJson } from "./../process.js";
 
@@ -13,8 +13,6 @@
     let name = "t1 temper";
     let t1value = 0;
     let error = "";
-    let e = {};
-    tpl_cutoff_body = [];
 
     // let color_value = q["color"];
     // let fillcolor = "#" + dec2hex(color_value);
@@ -63,6 +61,7 @@
 </div>
 
 <!-- tpl_cutoff_body -->
+{#if $globalSensorsJson.sensors!=undefined}
 {#each $globalSensorsJson.sensors as item (item.key)}
     <div class="row row-striped">
         <div class="pt-10 pb-10 clearfix" class:bg-danger={item.alert_value > 0 && item.sensor_value >= item.alert_value}>
@@ -83,6 +82,9 @@
 {:else}
     <div class="row row-striped">нет датчиков температуры</div>
 {/each}
+{:else}
+    <div class="row row-striped">нет датчиков температуры</div>
+{/if}
 
 <!-- tpl_all_body -->
 <!-- <div class="row row-striped">
@@ -97,6 +99,7 @@
     </div>
 </div> -->
 
+{#if $globalSensorsJson.devices!=undefined}
 {#each $globalSensorsJson.devices as item (item.key)}
     <div class="row row-striped">
         <div class="pt-10 pb-10 clearfix">
@@ -111,8 +114,12 @@
 {:else}
     <div class="row row-striped">нет исполнительных устройств</div>
 {/each}
+{:else}
+    <div class="row row-striped">нет исполнительных устройств</div>
+{/if}
 
-{#each $globalSensorsJson.devices as item (item.key)}
+{#if $globalSensorsJson.safety!=undefined}
+{#each $globalSensorsJson.safety as item (item.key)}
     <div class="row row-striped">
         <div class="pt-10 pb-10 clearfix" class:bg-danger={item.allertValue > 0}>
             <div class="col-xs-12 col-sm-4 text-center-xs text-strong" class:text-danger={item.allertValue > 0}>{item.name}</div>
@@ -124,3 +131,6 @@
 {:else}
     <div class="row row-striped">нет устройств безопасности</div>
 {/each}
+{:else}
+    <div class="row row-striped">нет устройств безопасности</div>
+{/if}

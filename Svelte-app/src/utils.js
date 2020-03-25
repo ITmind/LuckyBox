@@ -18,9 +18,9 @@ export default class{
 	 * @param {string|boolean} success_text - текстовое сообщение в диалоговое окно при успешной отправке данных
 	 */
 
-export function sendRequest(url, data, success_action, error) {
+export async function sendRequest(url, data, success_action, error) {
     error = null;
-    let ajax_url_debug = 'http://127.0.0.1/';
+    let ajax_url_debug = 'http://127.0.0.1:5000/';
     const response = await fetch(ajax_url_debug + url, {
         method: 'GET',
         body: data,

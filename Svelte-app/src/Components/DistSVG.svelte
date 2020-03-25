@@ -1,6 +1,7 @@
 <script>
     export let alco_val = 0;
     let hide_alco = true;
+    let svg_distillation_alco_val = 10;
     $: svg_distillation_alco_val > 0 ? hide_alco = false : hide_alco = true;
 </script>
 

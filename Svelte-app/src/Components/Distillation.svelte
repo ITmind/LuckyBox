@@ -5,10 +5,9 @@
 <script>
     import DistSVG from "./DistSVG.svelte";
     import Volume from "./Volume.svelte";
-    import Power from "./Power.svelte";
-    import Modal from "./Modal.svelte";
-    import PowerLower from "./PowerLower.svelte";
-    import ModalYesNo from "./ModalYesNo.svelte";
+    import Power from "./Templ/Power.svelte";
+    import PowerLower from "./Templ/PowerLower.svelte";
+    import ModalYesNo from "./Templ/ModalYesNo.svelte";
     import ShowSensors from "./ShowSensors.svelte";
     import { sendRequest, objIsEmpty, secToTime } from "./../utils.js";
     import { startInterval, stopInterval, globalSensorsJson } from "./../process.js";
@@ -134,11 +133,11 @@
 <!------------------------------------------->
 
 {#if showModal}
-    <Modal on:close={() => (showModal = false)} on:onOkey={launchDistillation}>
+    <ModalYesNo on:close={() => (showModal = false)} on:onOkey={launchDistillation}>
         <p class="text-center text-danger text-strong" slot="header">
             Будет запущен процесс дистилляции, убедитесь в том, что в тэн залит жидкостью!
         </p>
-    </Modal>
+    </ModalYesNo>
 {/if}
 
 <div class="container tab-pane theme_grey swipe-tab-content active">
@@ -156,11 +155,15 @@
                     <div class="row row-striped">
                         <div class="col-xs-12 col-md-6 text-center-xs text-middle text-strong">
                             Текущая операция:
+                            {#if $globalSensorsJson.process=undefined}
                             <span class="text-primary">{$globalSensorsJson.process.step}</span>
+                            {/if}
                         </div>
                         <div id="distillation_time" class="col-xs-12 col-md-6 text-center-xs text-middle text-strong">
                             Прошло времени:
+                            {#if $globalSensorsJson.process=undefined}
                             <span class="text-primary">{secToTime(Number($globalSensorsJson.process.time))}</span>
+                            {/if}
                         </div>
 
                         <Power current_value={$globalSensorsJson.power} bind:value={$globalSensorsJson.powerHigh} />

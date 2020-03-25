@@ -1,4 +1,5 @@
-import { sendRequest, objIsEmpty } from "./../utils.js";
+import { writable } from 'svelte/store';
+import { sendRequest, objIsEmpty } from "./utils.js";
 
 //общие данные всего приложения
 export const globalSensorsJson = writable({});
