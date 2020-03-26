@@ -1,3 +1,19 @@
+<style>
+    div {
+        display: grid;
+        grid-template-columns: 30px 50px 30px;
+    }
+    div button:first-child{
+        margin-left: -1px;
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+    }
+    div button:last-child{
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+    }
+</style>
+
 <script>
     export let value = "";
     export let min = 0;
@@ -26,7 +42,7 @@
         flagButtonPress = true;
 
         let count_interval = 0;
-        let time = 500;
+        let time = 200;
         let _step = step;
         timeout = setInterval(function() {
             count_interval++;
@@ -52,29 +68,27 @@
             value = min;
         }
     }
-
 </script>
 
-<div class="input-group input-group-sm number-group">
-    <span class="input-group-btn minus">
-        <button
-            type="button"
-            class="btn btn-danger btn-number noSwipe"
-            on:click="{e => value--}"
-            on:mousedown|preventDefault={e => mousedown(false)}
-            on:mouseup|preventDefault={mouseup}>
-            <span class="glyphicon glyphicon-minus" />
-        </button>
-    </span>
-    <input bind:value={value} class="form-control input-number noSwipe" type="number" {min} {max} {step} size="3" />
-    <span class="input-group-btn plus">
-        <button
-            type="button"
-            class="btn btn-success btn-number noSwipe"
-            on:click="{e => value++}"
-            on:mousedown|preventDefault={e => mousedown(true)}
-            on:mouseup|preventDefault={mouseup}>
-            <span class="glyphicon glyphicon-plus" />
-        </button>
-    </span>
+<div>
+
+    <button
+        type="button"
+        class="btn btn-danger btn-number noSwipe"
+        on:click={e => value--}
+        on:mousedown|preventDefault={e => mousedown(false)}
+        on:mouseup|preventDefault={mouseup}>
+        <span class="glyphicon glyphicon-minus" />
+    </button>
+
+    <input bind:value type="number" {min} {max} {step} size="3" />
+    <button
+        type="button"
+        class="btn btn-success btn-number noSwipe"
+        on:click={e => value++}
+        on:mousedown|preventDefault={e => mousedown(true)}
+        on:mouseup|preventDefault={mouseup}>
+        <span class="glyphicon glyphicon-plus" />
+    </button>
+
 </div>

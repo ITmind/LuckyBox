@@ -8,7 +8,7 @@
         background: rgba(0, 0, 0, 0.3);
     }
 
-    .modal {
+    .modal_dialog {
         position: absolute;
         left: 50%;
         top: 50%;
@@ -83,13 +83,12 @@
 
 <div class="modal-background" />
 
-<div class="modal" role="dialog" aria-modal="true" bind:this={modal}>
+<div class="modal_dialog" role="dialog" aria-modal="true" bind:this={modal}>
     <slot name="header" />
     <hr />
 
     <div class="buttons">
         <button on:click={_onCancel}>Да</button>
-        <!-- svelte-ignore a11y-autofocus -->
-        <button autofocus on:click={_onOkay}>Нет</button>
+        <button on:click={_onOkay}>Нет</button>
     </div>
 </div>

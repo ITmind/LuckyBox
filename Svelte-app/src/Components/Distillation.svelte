@@ -28,9 +28,11 @@
 
     function startStop() {
         if (isStart) {
+            
             //open dialog
-            launchDistillation();
+            //launchDistillation();
         } else {
+            showModal = true;
             //open dialog Вы действительно хотите остановить процесс дистилляции?
         }
     }
