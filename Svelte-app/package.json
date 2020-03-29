@@ -23,6 +23,7 @@
   "dependencies": {
     "node-sass": "^4.13.1",
     "sirv-cli": "^0.4.4",
-    "svelte-atoms": "0.0.17"
+    "svelte-atoms": "0.0.17",
+    "vanilla-picker": "^2.10.1"
   }
 }

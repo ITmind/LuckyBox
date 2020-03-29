@@ -11,7 +11,7 @@
     import Sensors from "./Sensors.svelte";
 
 
-    let selected_component = Distillation;
+    let selected_component = Sensors;
 </script>
 
 <!------------------------------------------->
