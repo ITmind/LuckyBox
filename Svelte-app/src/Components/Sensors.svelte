@@ -4,7 +4,7 @@
 
 <script>
     import { startInterval, stopInterval, globalSensorsJson } from "./../process.js";
-    import Picker from "vanilla-picker";
+    import Picker from "vanilla-picker"; //npm install vanilla-picker --save
     let t_sensors = [1, 2, 3, 4, 5, 6, 7, 8];
     let devices = [1, 2, 3, 4];
     let safety = [1, 2, 3, 4];
