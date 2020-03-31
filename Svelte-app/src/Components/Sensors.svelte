@@ -18,6 +18,10 @@
         grid-template-columns: 40px 2fr 70px 100px 1fr 1fr 1fr;
     }
 
+    section > div > :global(*){
+        justify-content: center;
+    }
+
     section > div:first-of-type {
         border-bottom: 1px;
         border-bottom-style: solid;
@@ -42,8 +46,9 @@
         border-radius: 0px;
         background: white;
     }
-    input, select {
-        background-color: transparent ;
+    input,
+    select {
+        background-color: transparent;
         outline: none !important;
         border: none;
         border-bottom-style: solid;
@@ -54,28 +59,33 @@
 
     input:focus {
         border-bottom-width: 2px;
-        border-bottom-color: black;
+        border-bottom-color: #1976d2;
     }
+
+    
 </style>
 
 <script>
     import { startInterval, stopInterval, globalSensorsJson } from "./../process.js";
     import Picker from "vanilla-picker"; //npm install vanilla-picker --save
     import { onMount } from "svelte";
+    import { ButtonGroup, Button, Checkbox,Textfield } from "svelte-mui/src";
+
     let t_sensors = [1, 2, 3, 4, 5, 6, 7, 8];
     let devices = [1, 2, 3, 4];
     let safety = [1, 2, 3, 4];
 
+    let val1 = "r";
     let thisElement;
     //инициируем кнопки выбора цвета
     onMount(() => {
-        var color_buttons = thisElement.querySelectorAll("div div button");
-        color_buttons.forEach(element => {
-            var picker = new Picker(element);
-            picker.onChange = function(color) {
-                element.style.background = color.rgbaString;
-            };
-        });
+        // var color_buttons = thisElement.querySelectorAll("div div button");
+        // color_buttons.forEach(element => {
+        //     var picker = new Picker(element);
+        //     picker.onChange = function(color) {
+        //         element.style.background = color.rgbaString;
+        //     };
+        // });
     });
 </script>
 
@@ -118,9 +128,9 @@
                 <span class="">&#176С</span>
             </div>
 
-            <input type=checkbox>
-            <input type=checkbox>
-            <input type=checkbox>
+            <Checkbox />
+            <Checkbox />
+            <Checkbox />
         </div>
     {/each}
 
@@ -142,7 +152,7 @@
         <div>
 
             <button />
-            <input placeholder="out{i}" id="device_name_out{i}" type="text" value="" />
+            <input placeholder="out{i}" type="text" value="" />
 
         </div>
     {/each}
@@ -152,15 +162,14 @@
     {#each safety as saf, i}
         <div>
             <button />
-            <input placeholder="in{i}" id="safety_name_in{i}" type="text" value="" />
+            <input placeholder="in{i}" type="text" value="" />
 
         </div>
     {/each}
 
-    <div>
-        <button id="get_sensors" type="button" class="btn btn-primary btn-sm noSwipe mt-10">Опросить датчики</button>
-        <button id="reset_sensors" type="button" class="btn btn-danger btn-sm noSwipe mt-10">Сбросить настройки</button>
-        <button id="set_sensors" type="button" class="btn btn-success btn-sm noSwipe mt-10">Сохранить</button>
-    </div>
+    <ButtonGroup color="primary">
+        <Button raised color='red'>Сбросить настройки</Button>
+        <Button raised>Сохранить</Button>
+    </ButtonGroup>
 
 </section>

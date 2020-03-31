@@ -18,6 +18,7 @@
     "rollup-plugin-terser": "^5.1.2",
     "svelte": "^3.0.0",
     "svelte-material-ui": "^1.0.0-beta.20",
+    "svelte-mui": "^0.3.3",
     "svelte-preprocess": "^3.5.0"
   },
   "dependencies": {
