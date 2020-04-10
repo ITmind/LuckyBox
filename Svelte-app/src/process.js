@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store';
+import { writable, get } from 'svelte/store';
 import { sendRequest, objIsEmpty } from "./utils.js";
 
 //общие данные всего приложения
@@ -9,22 +9,35 @@ let openModalError = false;
 let curProcess = 0;
 let countProcess = 0;
 let countIntervalError = 0;
-let secondInterval = 1000;
+let secondInterval = 5000;
+let sensorsIntervalId = 0;
 
 function getIntervalSensors() {
     let error = "";
     //получаем один раз
-    if (objIsEmpty(get(globalSensorsJson))) {
-        console.log('SensorsOut');    
-        sendRequest(ajax_url_debug + 'SensorsOut', {}, msg => globalSensorsJson.set(msg), error);
+    let gl = get(globalSensorsJson);
+    if (gl.sensors == undefined) {
+        sendRequest('SensorsOut', null, msg => globalSensorsJson.set(msg), error);
+        startInterval();
     }
-    if (!error) {
+    else{
+        sendRequest('SensorsValue', null, success, error);
+    }
+    if (error!="") {
+        console.log('Error ' + error);
         return;
     }
 
-    //получаем каждую секунду
-    sendRequest(ajax_url_debug + 'SensorsValue', {}, success, error);
+    function test(msg) {
+        msg.then(x => {
+            console.log(x);
+            globalSensorsJson.set(x);
+        }
+        );
 
+    }
+
+    //получаем каждую секунду
     function success(msg) {
         globalSensorsJson.update(n => {
             msg.sensors.forEach((element, i) => n.sensors[i].value = element.value);

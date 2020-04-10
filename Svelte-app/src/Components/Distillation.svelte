@@ -1,14 +1,19 @@
 <style>
-
+    section {
+        display: grid;
+        grid-template-columns: auto 1fr;
+    }
 </style>
 
 <script>
     import DistSVG from "./DistSVG.svelte";
     import Volume from "./Volume.svelte";
+    import Chart from "./Chart.svelte";
     import Power from "./Templ/Power.svelte";
     import PowerLower from "./Templ/PowerLower.svelte";
     import ModalYesNo from "./Templ/ModalYesNo.svelte";
     import ShowSensors from "./ShowSensors.svelte";
+    import { Button } from "svelte-mui";
     import { sendRequest, objIsEmpty, secToTime } from "./../utils.js";
     import { startInterval, stopInterval, globalSensorsJson } from "./../process.js";
 
@@ -28,7 +33,6 @@
 
     function startStop() {
         if (isStart) {
-            
             //open dialog
             //launchDistillation();
         } else {
@@ -142,54 +146,39 @@
     </ModalYesNo>
 {/if}
 
-<div class="container tab-pane theme_grey swipe-tab-content active">
-    <div class="row">
-        <div id="error_distillation" class="col-md-offset-2 col-md-8" />
-    </div>
-    <div class="row">
-        <div class="col-md-12 fill-height">
-            <div class="row mt-10">
-                <div class="col-xs-offset-3 col-xs-6 col-sm-3 col-sm-offset-0 svg-container">
-                    <DistSVG alco_val={$globalSensorsJson.cubeAlcohol} />
-                </div>
-                <div class="col-xs-12 col-sm-9">
+<section>
+    <DistSVG alco_val={$globalSensorsJson.cubeAlcohol} />
 
-                    <div class="row row-striped">
-                        <div class="col-xs-12 col-md-6 text-center-xs text-middle text-strong">
-                            Текущая операция:
-                            {#if $globalSensorsJson.process=undefined}
-                            <span class="text-primary">{$globalSensorsJson.process.step}</span>
-                            {/if}
-                        </div>
-                        <div id="distillation_time" class="col-xs-12 col-md-6 text-center-xs text-middle text-strong">
-                            Прошло времени:
-                            {#if $globalSensorsJson.process=undefined}
-                            <span class="text-primary">{secToTime(Number($globalSensorsJson.process.time))}</span>
-                            {/if}
-                        </div>
+    <div>
+        <div id="error_distillation" />
 
-                        <Power current_value={$globalSensorsJson.power} bind:value={$globalSensorsJson.powerHigh} />
-                        <PowerLower bind:value={$globalSensorsJson.powerLower} />
-                        <ShowSensors />
-                    </div>
-                    <div class="form-group pt-10 clearfix">
-                        <button id="distillation_add_sensor" type="button" class="btn btn-primary btn-sm noSwipe" on:click={add_sensor}>
-                            Добавить датчики для процесса
-                        </button>
-                    </div>
-
-                    <Volume bind:volume={distillation_volume} />
-
-                    <div class="form-group pt-10 pb-10 clearfix" id="distillation_start_group_button">
-                        <button on:click={startStop} type="button" class="btn btn-danger btn-sm pull-left noSwipe" class:hide={!isStart}>СТОП</button>
-                        <button on:click={startStop} type="button" class="btn btn-success btn-sm noSwipe" class:hide={isStart}>СТАРТ</button>
-                    </div>
-                </div>
-
-                <div class="col-xs-12">
-                    <div class="bg-info noSwipe" id="view_distillation_chart" />
-                </div>
-            </div>
+        <div>
+            Текущая операция:
+            {#if ($globalSensorsJson.process = undefined)}
+                <span>{$globalSensorsJson.process.step}</span>
+            {/if}
         </div>
+        <div>
+            Прошло времени:
+            {#if ($globalSensorsJson.process = undefined)}
+                <span>{secToTime(Number($globalSensorsJson.process.time))}</span>
+            {/if}
+        </div>
+
+        <Power current_value={$globalSensorsJson.power} 
+            bind:powerHigh={$globalSensorsJson.powerHigh}
+            bind:powerLower={$globalSensorsJson.powerLower} />
+        <ShowSensors />
+
+        <Volume bind:volume={distillation_volume} />
+
+        {#if isStart}
+            <Button raised color="red" on:click={startStop} disabled>СТОП</Button>
+        {:else}
+            <Button raised color="primary" on:click={startStop}>СТАРТ</Button>
+        {/if}
+
     </div>
-</div>
+
+    <Chart />
+</section>

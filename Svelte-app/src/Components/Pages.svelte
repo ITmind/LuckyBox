@@ -10,8 +10,7 @@
     import Mashing from "./Mashing.svelte";
     import Sensors from "./Sensors.svelte";
 
-
-    let selected_component = Sensors;
+    export current_page = Sensors;
 </script>
 
 <!------------------------------------------->

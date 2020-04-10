@@ -9,7 +9,7 @@
         line-height: 1;
         min-width: inherit;
         padding: 0 4px 0 6px;
-        position: fixed;
+        /* position: fixed; */
         left: 0;
         top: 0;
         right: 0;
@@ -25,7 +25,7 @@
         line-height: 1;
         min-width: inherit;
         padding: 0 4px 0 6px;
-        position: fixed;
+        /* position: fixed; */
         left: 0;
         top: 49px;
         right: 0;
@@ -33,6 +33,11 @@
     }
     nav > p {
         margin: 0px 20px;
+    }
+
+    ul{
+        display: flex;
+        list-style-type: none;
     }
 </style>
 
@@ -45,7 +50,7 @@
     import Mashing from "./Mashing.svelte";
     import Sensors from "./Sensors.svelte";
 
-    let selected_page;
+    export let selected_page = Distillation;
 
     let pages=[
       {name : "Дистилляция", component : Distillation},
@@ -69,15 +74,15 @@
     <ul>
     {#each pages as page}
         <li>
-            <a on:click={e => (selected_page = Distillation)}>{page.name}</a>
+            <Button color="white" on:click={e => (selected_page = page.component)}>{page.name}</Button>
         </li>
         {/each}
     </ul>
 </nav>
 
-<Sidepanel left>
+<!-- <Sidepanel left>
     <div class="logo" style="padding-left: 1rem;">Help</div>
     <p>
         <i style="padding: 12px;">Blank</i>
     </p>
-</Sidepanel>
+</Sidepanel> -->

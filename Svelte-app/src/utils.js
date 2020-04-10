@@ -20,21 +20,27 @@ export default class{
 
 export async function sendRequest(url, data, success_action, error) {
     error = null;
-    let ajax_url_debug = 'http://127.0.0.1:5000/';
+    let ajax_url_debug = 'https://pyserver.azurewebsites.net/';
+    console.log(ajax_url_debug + url);
+    
     const response = await fetch(ajax_url_debug + url, {
         method: 'GET',
+        mode: 'cors', 
         body: data,
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'text/plain'
         }
     });
 
-    if (!responce.ok) {
-        error = alertAjaxError(response, response.text());
+    if (response.ok) {
+        if (success_action !== false) {
+            // let packet = response.json();
+            response.json().then(msg => success_action(msg));
+        }
     }
-
-    if (success_action !== false) {
-        success_action(response.json());
+    else{
+        response.text().then(msg => error = msg);
+        // error = alertAjaxError(response, );
     }
 }
 
@@ -133,6 +139,10 @@ export function objIsEmpty(obj, key) {
         }
     } else {
         for (let i in obj) {
+            if(i=="set" || i=="update"||i=="subscribe"){
+                continue;
+            }
+
             if (obj.hasOwnProperty(i)) {
                 return false;
             }

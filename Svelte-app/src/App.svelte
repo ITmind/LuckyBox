@@ -1,9 +1,15 @@
+<style>
+</style>
+
 <script>
     import Navbar from "./Components/Navbar.svelte";
-    import Pages from "./Components/Pages.svelte";
+    // import Pages from "./Components/Pages.svelte";
     import Footer from "./Components/Footer.svelte";
-    
+    import { startInterval, stopInterval, globalSensorsJson } from "./process.js";
 
+    startInterval();
+
+    let current_page;
     // import MyBtn from "./Components/myBtn.svelte";
 
     //Запуск аудио
@@ -37,8 +43,11 @@
     // }
 </script>
 
-<Navbar />
-<Pages />
+<Navbar bind:selected_page={current_page} />
+
+<svelte:component this={current_page} />
+
+<!-- <Pages /> -->
 <Footer />
 
 <!-- <audio id="alert_audio" preload="none">
