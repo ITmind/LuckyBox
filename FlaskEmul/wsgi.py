@@ -1,20 +1,14 @@
-from flask import Flask, escape, request, send_from_directory, render_template
-import os
+from flask import Flask
+from flask_cors import CORS
 import json
 
-
-app = Flask(__name__,
-            static_folder=os.path.join('.', 'data_uncompressed'))
-
-
-@app.route('/')
-def root():
-    return send_from_directory('data_uncompressed', 'index.htm')
+application = Flask(__name__)
+# CORS(application)
 
 
-@app.route('/SensorsValue')
-def SensorsOut():
-    print('SensorsOut')
+@application.route('/SensorsValue')
+def SensorsValue():
+    print('SensorsValue')
     data = {
         "process": {
             "allow": True, "number": 1, "step": 1, "time": 1, "timeStart": 1},
@@ -44,7 +38,8 @@ def SensorsOut():
     }
     return json.dumps(data)
 
-@app.route('/SensorsOut')
+
+@application.route('/SensorsOut')
 def SensorsOut():
     print('SensorsOut')
     data = {
@@ -110,7 +105,7 @@ def SensorsOut():
     return json.dumps(data)
 
 
-@app.route('/distillationSensorsGetTpl')
+@application.route('/distillationSensorsGetTpl')
 def distillationSensorsGetTpl():
     print('distillationSensorsGetTpl')
     data = {
@@ -129,7 +124,7 @@ def distillationSensorsGetTpl():
     return json.dumps(data)
 
 
-@app.route('/configs.json')
+@application.route('/configs.json')
 def congigjson():
     data = {
         "version": "1.0",
@@ -143,7 +138,7 @@ def congigjson():
     return json.dumps(data)
 
 
-@app.route('/refluxSensorsSetLoad')
+@application.route('/refluxSensorsSetLoad')
 def refluxSensorsSetLoad():
     data = {
         "t1": {"value": 20, "name": "t1", "color": "red",
@@ -159,6 +154,3 @@ def refluxSensorsSetLoad():
         "number": 1, "powerHigh": 250, "powerLower": 200
     }
     return json.dumps(data)
-
-
-app.run(debug=True)
